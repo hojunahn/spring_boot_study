@@ -7,6 +7,8 @@ import com.kh.totalEx.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -15,10 +17,13 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-
-    // 회원 정보 조회
-//    public List<MemberResDto> getMemberList(){
-//        List<Member> members = memberRepository.findAll();
-//        List<>
-//    }
+    // 회원 전체 조회
+    public List<MemberResDto> getMemberList() {
+        List<Member> members = memberRepository.findAll();
+        List<MemberResDto> memberDto = new ArrayList<>();
+        for(Member member : members) {
+            memberDto.add(MemberResDto.of(member));
+        }
+        return memberDto;
+    }
 }
